@@ -209,6 +209,46 @@
       background-color: rgba(0,0,0,0.1);
       border-radius: 0 4px 4px 0;
     }
+    
+    /* [--- Phase 2 Add ---] 全站共用按鈕樣式 */
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      margin: 0.25rem;
+      text-align: center;
+      border: 1px solid transparent;
+      font-size: 0.95rem;
+    }
+    
+    .btn-primary {
+      background-color: var(--color-accent);
+      color: var(--color-bg);
+      border-color: var(--color-accent);
+    }
+    
+    .btn-primary:hover {
+      background-color: var(--color-accent-hover);
+      border-color: var(--color-accent-hover);
+      color: var(--color-bg);
+      text-decoration: none;
+    }
+    
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--color-accent);
+      border-color: var(--color-accent);
+    }
+    
+    .btn-secondary:hover {
+      background-color: var(--color-accent);
+      color: var(--color-bg);
+      text-decoration: none;
+    }
     /* CSS:BASE-END */
     
 
@@ -239,14 +279,37 @@
     
 
     /* CSS:ABOUT-START */
+    /* [--- Phase 2 Update ---] */
     /* Mobile-First: 預設為單欄 (圖片在文字下方) */
+    .about-text {
+      text-align: left; /* Mobile: 內文靠左 */
+    }
+    
     .about-image {
-      margin-top: 2rem;
+      margin-top: 2.5rem; /* Mobile: 圖片與文字間距 */
     }
     
     .about-image img {
       border-radius: 8px;
       box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+    
+    .about-strengths {
+      list-style-type: disc; /* 使用圓點 */
+      padding-left: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .about-strengths li {
+      margin-bottom: 1rem;
+    }
+    
+    .about-actions {
+      margin-top: 2rem;
+      display: flex;
+      flex-wrap: wrap; /* Mobile: 按鈕可換行 */
+      gap: 0.5rem;
+      justify-content: flex-start; /* Mobile: 按鈕靠左 */
     }
     /* CSS:ABOUT-END */
     
@@ -347,6 +410,7 @@
       }
 
       /* ----- About RWD (改為雙欄) ----- */
+      /* [--- Phase 1 Rule ---] (此規則在 Phase 2 中依然有效) */
       .about-content {
         display: grid;
         grid-template-columns: 1fr 1fr; /* 左右 1:1 雙欄 */
@@ -411,13 +475,24 @@
           
           <div class="about-content">
             <div class="about-text">
-              <p>這裡是 About 區的占位內容。未來這裡會放上更詳細的自我介紹（例如從職涯顧問轉職的動機）、職涯歷程、個人理念或價值觀。</p>
-              <p class="placeholder-notice"><strong>開發者提示：</strong>之後會用 Section SDD 的 Prompt 產生新的 section，請把新的 section 程式碼整段貼在這兩個註解（SECTION:ABOUT-START / SECTION:ABOUT-END）中間，完全取代現在這一區。</p>
+              <p>我是一名網頁前端工程師，專注於打造兼具美觀與功能性的使用者介面。我熟悉使用 HTML, CSS (SCSS), JavaScript，並專精於 React 框架來開發互動式網頁應用。</p>
+              <p>我擁有近 7 年的外商客服背景，這培養了我強大的同理心與跨部門溝通協調能力。轉職後，我將這份特質帶入開發，重視團隊合作與使用者體驗，並樂於學習新知與接受挑戰。</p>
+              
+              <ul class="about-strengths">
+                <li><strong>前端技術實作：</strong>使用 React, JavaScript, CSS/SCSS 打造符合需求的互動式網頁。</li>
+                <li><strong>跨領域溝通：</strong>憑藉客服經驗，能同理使用者需求，並與設計師、後端工程師高效協作。</li>
+                <li><strong>快速學習與適應：</strong>樂於接受新技術挑戰，能快速將所學應用於專案中。</li>
+              </ul>
+
+              <div class="about-actions">
+                <a href="#projects" class="btn btn-primary">查看作品集</a>
+                <a href="#contact" class="btn btn-secondary">聯絡我</a>
+              </div>
             </div>
             
             <div class="about-image">
-              <img src="https://source.unsplash.com/800x600/?developer,laptop,code" 
-                   alt="開發者在筆電前專注撰寫程式碼的示意圖" 
+              <img src="https://source.unsplash.com/800x600/?developer,desk,workspace" 
+                   alt="前端工程師的工作桌面，包含筆電、鍵盤與咖啡" 
                    loading="lazy" 
                    width="800" 
                    height="600">
