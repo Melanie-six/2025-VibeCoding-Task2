@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>你的名字 · 前端開發者 | 個人品牌網站</title>
+  <title>Melanie · 前端開發者 | 個人品牌網站</title>
   <meta name="description" content="這是一個前端開發者的個人品牌網站，用於展示專業技能、精選作品集、個人背景介紹，並提供詳細的聯絡方式。">
 
-  <style>
+<style>
     :root {
       --color-bg: #1a202c; /* 深灰藍 (主要背景) */
       --color-bg-secondary: #2d3748; /* 次要背景 (例如 header, footer, 偶數區塊) */
@@ -157,7 +157,7 @@
     .section {
       padding-top: 4rem;
       padding-bottom: 4rem;
-      /* 區塊滾動時，預留 sticky header 的高度 */
+      /* 區塊滾動時，預留 sticky header の高度 */
       scroll-margin-top: var(--header-height);
     }
     
@@ -253,27 +253,65 @@
     
 
     /* CSS:HERO-START */
+    /* [--- Phase 2 (Hero) Update ---] */
     .section-hero {
       /* 確保 Hero 區內容在 sticky header 下方 */
       padding-top: calc(4rem + var(--header-height)); 
+      padding-bottom: 4rem;
       min-height: 70vh;
       display: flex;
       align-items: center;
-      text-align: center;
+      text-align: center; /* Mobile: 預設置中 */
+      background-color: var(--color-bg); /* 確保背景色 */
     }
     
+    .hero-container {
+      /* Mobile: 預設單欄 */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2.5rem;
+    }
+    
+    .hero-text {
+       order: 2; /* Mobile: 文字在下 */
+    }
+
     .section-hero h1 {
       /* 響應式字體大小 */
-      font-size: clamp(2.5rem, 6vw, 4rem); 
+      font-size: clamp(2.2rem, 6vw, 3rem); 
       margin-bottom: 1.5rem;
     }
     
-    .section-hero p {
+    .hero-subheading { /* New class for the <p> tag */
       font-size: 1.15rem;
       color: var(--color-text-secondary);
       max-width: 600px;
       margin-left: auto;
       margin-right: auto;
+      margin-bottom: 2rem;
+    }
+    
+    .hero-image {
+      order: 1; /* Mobile: 圖片在上 */
+      max-width: 300px; /* 限制頭像大小 */
+      width: 100%;
+    }
+    
+    .hero-image img {
+      width: 100%;
+      height: 300px; /* 確保是 1:1 */
+      object-fit: cover;
+      border-radius: 50%; /* 圓形頭像 */
+      border: 4px solid var(--color-bg-secondary);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+    
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center; /* Mobile: 按鈕置中 */
+      gap: 0.5rem;
     }
     /* CSS:HERO-END */
     
@@ -315,37 +353,194 @@
     
 
     /* CSS:SKILLS-START */
+    /* [--- Phase 2 (Skills) Update ---] */
     .section-skills {
-      /* 骨架階段：占位樣式 */
+      text-align: left; /* 讓卡片對齊 */
+      background-color: var(--color-bg); /* 確保背景色 (奇數區塊) */
+    }
+
+    /* 技能區塊的引言 */
+    .section-intro {
       text-align: center;
+      font-size: 1.1rem;
+      color: var(--color-text-secondary);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 3rem;
+    }
+
+    /* 技能卡片網格 (Mobile-First: 預設單欄) */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    /* 技能卡片 */
+    .skill-card {
+      background-color: var(--color-bg-secondary);
+      border-radius: 8px;
+      padding: 2rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      border-left: 4px solid var(--color-accent);
+      transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+    }
+
+    /* 卡片標題 */
+    .skill-card-title {
+      font-size: 1.5rem;
+      color: var(--color-heading);
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--color-bg); /* 用稍暗的顏色分隔 */
+      padding-bottom: 0.75rem;
+    }
+
+    /* 技能列表 */
+    .skill-list {
+      list-style: none;
+      padding-left: 0;
+      /* Mobile: 預設單欄列表 */
+    }
+
+    .skill-list li {
+      margin-bottom: 0.75rem;
+      padding-left: 1.4rem;
+      position: relative;
+    }
+
+    /* 自訂的 list-style (用 CSS 偽元素) */
+    .skill-list li::before {
+      content: '✓'; /* 用 checkmark 增加專業感 */
+      position: absolute;
+      left: 0;
+      top: 1px;
+      color: var(--color-accent);
+      font-weight: bold;
     }
     /* CSS:SKILLS-END */
     
 
     /* CSS:PROJECTS-START */
+    /* [--- Phase 2 (Projects) Update ---] */
     .section-projects {
-      /* 骨架階段：占位樣式 */
+      background-color: var(--color-bg-secondary); /* 確保背景色 (偶數區塊) */
+    }
+    
+    .project-card {
+      background-color: var(--color-bg); /* 卡片用主背景色 */
+      border-radius: 8px;
+      margin-bottom: 3rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      /* Mobile: overflow hidden to contain image radius */
+      overflow: hidden; 
+    }
+    
+    .project-image img {
+      width: 100%;
+      height: 250px; /* 固定高度，避免圖片過大 */
+      object-fit: cover; /* 確保圖片不變形 */
+    }
+    
+    .project-content {
+      padding: 1.5rem 2rem; /* Mobile: 內距 */
+      text-align: left;
+    }
+    
+    .project-title {
+      font-size: 1.5rem;
+      color: var(--color-heading);
+      margin-bottom: 1rem;
+    }
+    
+    .project-description {
+      color: var(--color-text);
+      margin-bottom: 1.5rem;
+    }
+    
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      list-style: none;
+      padding: 0;
+      margin-bottom: 1.5rem;
+    }
+    
+    .project-tag {
+      background-color: var(--color-bg-secondary); /* 用次要背景色 */
+      border: 1px solid var(--color-accent);
+      color: var(--color-accent);
+      font-size: 0.8rem;
+      font-weight: bold;
+      padding: 0.25rem 0.75rem;
+      border-radius: 12px; /* 膠囊狀 */
+    }
+    
+    .project-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    
+    .project-footer {
       text-align: center;
+      margin-top: 2rem; /* 在最後一張卡片後 */
+      padding-top: 2rem;
+      border-top: 1px solid var(--color-bg);
+      color: var(--color-text-secondary);
+    }
+    
+    .project-footer a {
+      font-weight: bold;
     }
     /* CSS:PROJECTS-END */
     
 
     /* CSS:CONTACT-START */
+    /* [--- Phase 2 (Contact) Update ---] */
     .section-contact {
       text-align: center;
+      background-color: var(--color-bg); /* 確保背景色 (奇數區塊) */
     }
     
-    .contact-links-placeholder {
-      margin-top: 2rem;
-    }
-    
-    .contact-links-placeholder li {
-      margin-bottom: 1rem;
-    }
-    
-    .contact-links-placeholder a {
+    .contact-hook {
       font-size: 1.1rem;
-      word-break: break-all;
+      color: var(--color-text-secondary);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 1.5rem;
+    }
+    
+    /* 移除最後一個 hook 的 bottom margin */
+    .contact-hook:last-of-type {
+       margin-bottom: 0;
+    }
+    
+    .contact-cta {
+      font-size: 1.15rem;
+      color: var(--color-heading);
+      font-weight: bold;
+      margin-top: 1.5rem; /* 確保與 hook 之間有空間 */
+      margin-bottom: 2.5rem;
+    }
+    
+    .contact-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+    
+    .contact-actions .btn {
+      /* 讓按鈕在 mobile 上更寬一點 */
+      min-width: 150px;
     }
     /* CSS:CONTACT-END */
     
@@ -393,21 +588,44 @@
          margin-bottom: 4rem;
       }
       
-      /* ----- Hero RWD ----- */
+      /* [--- Phase 2 (Hero) Update ---] ----- Hero RWD ----- */
       .section-hero {
         text-align: left; /* 桌面：靠左 */
         padding-top: calc(6rem + var(--header-height));
+        padding-bottom: 6rem;
+        min-height: 90vh; /* 讓 Hero 區更高 */
       }
-      .section-hero .container {
-        /* 限制 Hero 區文字寬度，避免過寬 */
-        max-width: 800px; 
-        margin-left: auto;
-        margin-right: auto;
+      
+      .hero-container {
+        grid-template-columns: 1fr 1fr; /* 桌面：雙欄 */
+        display: grid;
+        gap: 4rem;
+        align-items: center;
       }
-      .section-hero p {
-        margin-left: 0; /* 桌面：靠左 */
+      
+      .hero-text {
+        order: 1; /* 桌面：文字在左 */
+      }
+      
+      .hero-subheading {
+        margin-left: 0;
         margin-right: 0;
       }
+      
+      .hero-image {
+        order: 2; /* 桌面：圖片在右 */
+        max-width: 400px;
+        justify-self: center; /* 讓圖片在 grid cell 中置中 */
+      }
+      
+      .hero-image img {
+        height: 400px; /* 1:1 */
+      }
+
+      .hero-actions {
+        justify-content: flex-start; /* 桌面：按鈕靠左 */
+      }
+      /* [--- End Phase 2 (Hero) Update ---] */
 
       /* ----- About RWD (改為雙欄) ----- */
       /* [--- Phase 1 Rule ---] (此規則在 Phase 2 中依然有效) */
@@ -422,6 +640,61 @@
       .about-image {
         margin-top: 0; /* 雙欄時不用 margin-top */
       }
+
+      /* [--- Phase 2 (Skills) Add ---] ----- Skills RWD (雙欄卡片) ----- */
+      .skills-grid {
+        grid-template-columns: 1fr 1fr; /* 平板：卡片變 2 欄 */
+        align-items: start; /* 讓卡片頂部對齊 */
+      }
+      
+      /* "Frontend" 卡片內容多，分成 2 欄 */
+      .skill-card-frontend .skill-list {
+        columns: 2;
+        gap: 1rem;
+      }
+      
+      /* "Tools" 卡片內容少，維持 1 欄 */
+      .skill-card-tools .skill-list {
+         columns: 1;
+      }
+      /* [--- End Phase 2 (Skills) Add ---] */
+
+
+      /* [--- Phase 2 (Projects) Add ---] ----- Projects RWD (Zig-zag) ----- */
+      .project-card {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2.5rem;
+        align-items: center;
+        overflow: visible; /* 移除 mobile 的 hidden */
+        margin-bottom: 5rem;
+      }
+      
+      .project-image img {
+        height: 300px; /* 桌面版可高一點 */
+        border-radius: 8px; /* 恢復四邊圓角 */
+      }
+      
+      .project-content {
+        padding: 0 1.5rem; /* [--- PADDING FIX ---] 桌面版左右留邊 */
+      }
+
+      /* --- The Zig-zag --- */
+      /* 專案 1 (nth-of-type(1)) 預設為 [圖][文] (order 0) */
+      
+      /* 專案 2 (nth-of-type(2)) 改為 [文][圖] */
+      .project-card:nth-of-type(2) .project-image {
+        order: 2; /* 圖片往右 */
+      }
+      .project-card:nth-of-type(2) .project-content {
+        order: 1; /* 文字往左 */
+      }
+      
+      .project-footer {
+         margin-top: 4rem; /* 增加與上方卡片的距離 */
+      }
+      /* [--- End Phase 2 (Projects) Add ---] */
+
 
     } /* --- End of @media (min-width: 768px) --- */
 
@@ -446,7 +719,7 @@
     
     <header class="site-header">
       <div class="container nav-container">
-        <a href="#hero" class="nav-logo">你的名字 · 前端開發者</a>
+        <a href="#hero" class="nav-logo">Melanie · 前端開發者</a>
         
         <nav class="nav">
           <ul class="nav-list">
@@ -463,10 +736,23 @@
     <main>
 
       <section id="hero" class="section section-hero" aria-labelledby="hero-heading">
-        <div class="container">
-          <h1 id="hero-heading">Hero 區塊主標題</h1>
-          <p>這裡是 Hero 區的占位內容。未來這裡會放上引人注目的主視覺、一句話自我介紹、核心職稱（例如 Frontend Developer）以及行動呼籲按鈕（例如 瀏覽作品集、下載履歷）。</p>
-          <p class="placeholder-notice"><strong>開發者提示：</strong>之後會用 Section SDD 的 Prompt 產生新的 section，請把新的 section 程式碼整段貼在這兩個註解（SECTION:HERO-START / SECTION:HERO-END）中間，完全取代現在這一區。</p>
+        <div class="container hero-container">
+          
+          <div class="hero-text">
+            <h1 id="hero-heading">你好，我是 Melanie。我專注於打造兼具「使用者同理心」與「精準技術」的前端介面。</h1>
+            <p class="hero-subheading">我熱衷於將複雜的需求轉化為流暢、易用的網頁產品。7 年的客戶服務背景，讓我能更深入地解決「人」的問題。</p>
+            <div class="hero-actions">
+              <a href="#projects" class="btn btn-primary">查看作品集</a>
+              <a href="#about" class="btn btn-secondary">關於我</a>
+            </div>
+          </div>
+
+          <div class="hero-image">
+            <img src="https://images.pexels.com/photos/5775854/pexels-photo-5775854.jpeg?auto=compress&cs=tinysrgb&w=800" 
+                 alt="Melanie 的專業形象照" 
+                 loading="lazy" width="400" height="400">
+          </div>
+
         </div>
       </section>
       <section id="about" class="section section-about" aria-labelledby="about-heading">
@@ -481,7 +767,7 @@
               <ul class="about-strengths">
                 <li><strong>前端技術實作：</strong>使用 React, JavaScript, CSS/SCSS 打造符合需求的互動式網頁。</li>
                 <li><strong>跨領域溝通：</strong>憑藉客服經驗，能同理使用者需求，並與設計師、後端工程師高效協作。</li>
-                <li><strong>快速學習與適應：</strong>樂於接受新技術挑戰，能快速將所學應用於專案中。</li>
+<li><strong>快速學習與適應：</strong>樂於接受新技術挑戰，能快速將所學應用於專案中。</li>
               </ul>
 
               <div class="about-actions">
@@ -491,11 +777,11 @@
             </div>
             
             <div class="about-image">
-              <img src="https://source.unsplash.com/800x600/?developer,desk,workspace" 
-                   alt="前端工程師的工作桌面，包含筆電、鍵盤與咖啡" 
+              <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&q=80" 
+                   alt="一台打開的筆記型電腦，螢幕上顯示著程式碼" 
                    loading="lazy" 
                    width="800" 
-                   height="600">
+                   height="533">
             </div>
           </div>
 
@@ -504,37 +790,115 @@
       <section id="skills" class="section section-skills" aria-labelledby="skills-heading">
         <div class="container">
           <h2 id="skills-heading" class="section-title">專業技能</h2>
-          <p>這裡是 Skills 區的占位內容。未來這裡會以清單或卡片形式，分類展示我熟練的前端技術，例如 HTML, CSS, JavaScript, React, Vue, Git, Firebase 等。</p>
-          <p class="placeholder-notice"><strong>開發者提示：</strong>之後會用 Section SDD 的 Prompt 產生新的 section，請把新的 section 程式碼整段貼在這兩個註解（SECTION:SKILLS-START / SECTION:SKILLS-END）中間，完全取代現在這一區。</p>
-        </div>
+          
+          <p class="section-intro">
+            我熱衷於將想法轉化為流暢的使用者體驗。以下是我用來打造現代網頁應用的技術：
+          </p>
+          
+          <div class="skills-grid">
+            
+            <div class="skill-card skill-card-frontend">
+              <h3 class="skill-card-title">前端開發 (Frontend)</h3>
+              <ul class="skill-list">
+                <li>HTML5</li>
+                <li>CSS3 / SCSS (SASS)</li>
+                <li>JavaScript (ES6+)</li>
+                <li>React</li>
+                <li>Redux</li>
+                <li>React Router</li>
+                <li>Styled-Components</li>
+                <li>Material-UI (MUI)</li>
+                <li>Bootstrap</li>
+              </ul>
+            </div>
+            
+            <div class="skill-card skill-card-tools">
+              <h3 class="skill-card-title">工具與其他 (Tools & Others)</h3>
+              <ul class="skill-list">
+                <li>Git</li>
+                <li>GitHub</li>
+                <li>VS Code</li>
+                <li>Figma</li>
+              </ul>
+            </div>
+            
+          </div></div>
       </section>
       <section id="projects" class="section section-projects" aria-labelledby="projects-heading">
         <div class="container">
           <h2 id="projects-heading" class="section-title">作品集</h2>
-          <p>這裡是 Projects 區的占位內容。未來這裡會以卡片列表（Grid）的形式，展示 3-6 個精選的個人專案（例如 Codepen 作品、加拿大旅遊網站等），包含專案截圖、名稱、簡介、技術標籤以及 GitHub/Demo 連結。</p>
-          <p class="placeholder-notice"><strong>開發者提示：</strong>之後會用 Section SDD 的 Prompt 產生新的 section，請把新的 section 程式碼整段貼在這兩個註解（SECTION:PROJECTS-START / SECTION:PROJECTS-END）中間，完全取代現在這一區。</p>
+
+          <div class="project-card">
+            <div class="project-image">
+              <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&q=80" 
+                   alt="RWD 個人品牌網站專案截圖" 
+                   loading="lazy" width="800" height="533">
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">RWD 網站實作｜個人品牌網站</h3>
+              <p class="project-description">根據設計稿獨立完成首頁切版，含 RWD 響應式與 GitHub Pages 發佈。</p>
+              <ul class="project-tags">
+                <li class="project-tag">HTML</li>
+                <li class="project-tag">SCSS</li>
+                <li class="project-tag">RWD</li>
+                <li class="project-tag">GitHub Pages</li>
+              </ul>
+              <div class="project-actions">
+                <a href="https://melanie-six.github.io/final-mission_hexschool" class="btn btn-primary" target="_blank" rel="noopener noreferrer">瀏覽網站</a>
+                <a href="https://github.com/melanie-six/final-mission_hexschool" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">查看原始碼</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-image">
+              <img src="https://images.pexels.com/photos/302804/pexels-photo-302804.jpeg?auto=compress&cs=tinysrgb&w=800" 
+                   alt="班夫國家公園景色，高山與湖泊" 
+                   loading="lazy" width="800" height="533">
+            </div>
+            <div class="project-content">
+              <h3 class="project-title">班夫旅遊網站</h3>
+              <p class="project-description">首次嘗試自行架設網站，與AI共同協作完成。</p>
+              <ul class="project-tags">
+                <li class="project-tag">HTML</li>
+                <li class="project-tag">CSS</li>
+                <li class="project-tag">JavaScript</li>
+                <li class="project-tag">AI 協作</li>
+              </ul>
+              <div class="project-actions">
+                <a href="https://melanie-six.github.io/Canada-Banff/" class="btn btn-primary" target="_blank" rel="noopener noreferrer">瀏覽網站</a>
+                <a href="https://github.com/melanie-six/Canada-Banff" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">查看原始碼</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="project-footer">
+            <p>除了以上精選專案，我也在 <a href="https://github.com/melanie-six" target="_blank" rel="noopener noreferrer">我的 GitHub</a> 上存放了許多技術實作練習，歡迎前往查看。</p>
+          </div>
+
         </div>
       </section>
       <section id="contact" class="section section-contact" aria-labelledby="contact-heading">
         <div class="container">
-          <h2 id="contact-heading" class="section-title">聯絡我</h2>
-          <p>這裡是 Contact 區的占位內容。未來這裡會提供我的聯絡方式，並鼓勵訪客與我聯繫（例如討論合作機會或技術交流）。</T>
+          <h2 id="contact-heading" class="section-title">與我聯繫</h2>
           
-          <ul class="contact-links-placeholder">
-            <li><a href="mailto:hello@example.com">Email: hello@example.com</a></li>
-            <li><a href="https://github.com/yourname" target="_blank" rel="noopener noreferrer">GitHub: yourname</a></li>
-            <li><a href="https://www.linkedin.com/in/yourname" target="_blank" rel="noopener noreferrer">LinkedIn: yourname</a></li>
-            <li><a href="tel:+886900000000">電話: +886-900-000-000</a> (此為占位，可選)</li>
-          </ul>
+          <p class="contact-hook">我目前正在尋找前端開發的相關機會，也樂於與您聊聊任何潛在的合作或技術交流。</p>
+          <p class="contact-hook">憑藉我的技術熱情與溝通背景，我相信我能為您的團隊帶來獨特的價值。</p>
+          <p class="contact-cta"><strong>期待您的來信！</strong></p>
 
-          <p class="placeholder-notice"><strong>開發者提示：</strong>之後會用 Section SDD 的 Prompt 產生新的 section，請把新的 section 程式碼整段貼在這兩個註解（SECTION:CONTACT-START / SECTION:CONTACT-END）中間，完全取代現在這一區。</p>
+          <div class="contact-actions">
+            <a href="mailto:qwtyopeil@google.com" class="btn btn-primary">Email</a>
+            <a href="https://www.linkedin.com/in/melanielin42485" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://github.com/melanie-six" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </div>
+
         </div>
       </section>
       </main>
 
     <footer class="site-footer">
       <div class="container">
-        <p>&copy; 2025 你的名字. 保留一切權利。</p>
+        <p>&copy; 2025 Melanie. 保留一切權利。</p>
       </div>
     </footer>
     
